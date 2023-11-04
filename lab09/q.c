@@ -39,29 +39,129 @@ char* str_to_upper(char* string){
 //Use str_to_upper() to change all the letters to uppercase
 WordCount words_starting_with(const char* dictionary, char letter){
     FILE *dict;
-    dict = fopen("allwords.txt","r");
+    char word[20];
+    int wordCount = 0;
+    dict = fopen(dictionary,"r");
 
     if(dict == NULL){
         
         return FILE_ERR_OPEN;
     }
 
-    while()
+    
+
+    while((fgets(word, 20,dict) != NULL )){
+    
+    str_to_upper(word);
+    str_to_upper(&letter);
+        if(word[0] == letter){
+            
+            wordCount++;
+            
+        
+        } 
+    }
 
     fclose(dict);
+
+    return wordCount;
 }
 
 ErrorCode spell_check(const char* dictionary, const char* word){
+    FILE *dict;
+    dict = fopen(dictionary,"r");
+    char dictWord[20];
+    char upperWord[20];
+    
 
-    return 1;
+    if(dict == NULL){
+        
+        return FILE_ERR_OPEN;
+    }
+
+    strcpy(upperWord,word);
+
+    str_to_upper(upperWord);
+
+    while(fscanf(dict, "%s",dictWord) != EOF ){
+    
+    str_to_upper(dictWord);
+
+    if(strcmp(dictWord, upperWord) == 0){
+            fclose(dict);
+            return WORD_OK;
+            
+        
+        }
+
+    }
+
+
+    fclose(dict);
+    return WORD_BAD;
 }
 
 ErrorCode word_lengths(const char* dictionary, WordCount lengths[], WordLength count){
+    FILE *dict;
+    dict = fopen(dictionary,"r");
+    char dictWord[20];
+    size_t wordLength;
 
-    return 1;
+    if(dict == NULL){
+        
+        return FILE_ERR_OPEN;
+    }
+
+    while(fscanf(dict, "%s",dictWord) != EOF){
+       
+       wordLength = strlen(dictWord);
+
+       if(wordLength >= 1 && wordLength <= count){
+            lengths[wordLength]++;
+       }
+
+    }
+
+
+    fclose(dict);
+    return FILE_OK;
 }
 
 ErrorCode info(const char* dictionary, DictionaryInfo* info){
+    FILE *dict;
+    dict = fopen(dictionary,"r");
+    char dictWord[20];
+    size_t wordLength;
+    info->shortest = 4; 
+    info->longest = 0;
+    info->count = 0;
 
-    return 1;
+
+    if(dict == NULL){
+        
+        return FILE_ERR_OPEN;
+    }
+
+    while(fscanf(dict, "%s",dictWord) != EOF){
+       
+       wordLength = strlen(dictWord);
+
+       
+       if(wordLength > info->longest){
+            info->longest = (WordLength)wordLength;
+            
+            
+           
+       }
+       if(wordLength < info->shortest){
+            
+            info->shortest = (WordLength)wordLength;
+            
+        }
+
+       info->count += 1;
+
+    }
+    fclose(dict);
+    return FILE_OK;
 }
