@@ -20,6 +20,12 @@
 #include <string.h>
 #include <ctype.h>
 
+
+/*
+    The function str_to_upper takes a string as input and transforms all lowercase letters within the string into uppercase, subsequently returning a pointer to the initial character of the string. 
+    Notably, this operation occurs in-place, meaning that the function modifies the original array provided as a function parameter without creating a new array. 
+    As a result, the returned object is identical to the original input, preserving the same value.
+*/
 char* str_to_upper(char* string){
 
     
@@ -34,9 +40,13 @@ char* str_to_upper(char* string){
 
     return original;
 }
-//Count the numbers of words in the file
-//Function is not case-sensitive
-//Use str_to_upper() to change all the letters to uppercase
+
+/*
+    The function words_starting_with, when provided with the file name of a dictionary text file, 
+    calculates the quantity of words commencing with a specified letter. If the file cannot be opened, it returns FILE_ERR_OPEN; otherwise, it yields the count of words that meet the criteria. 
+    Importantly, this function performs character comparisons in a case-insensitive manner, which is achieved by converting both operands of the comparison to uppercase using the str_to_upper() function. 
+    
+*/
 WordCount words_starting_with(const char* dictionary, char letter){
     FILE *dict;
     char word[20];
@@ -66,6 +76,13 @@ WordCount words_starting_with(const char* dictionary, char letter){
 
     return wordCount;
 }
+
+/*
+    The function spell_check when provided with the filename of a dictionary text file and a specific word, conducts a lookup operation for the word within the dictionary. 
+    The function provides three possible outcomes: FILE_ERR_OPEN is returned if the file cannot be opened, indicating an issue with accessing the dictionary. If the word is not found within the dictionary, it returns WORD_BAD. 
+    On the other hand, if the word is successfully located within the dictionary, it returns WORD_OK. 
+
+*/
 
 ErrorCode spell_check(const char* dictionary, const char* word){
     FILE *dict;
@@ -101,6 +118,13 @@ ErrorCode spell_check(const char* dictionary, const char* word){
     return WORD_BAD;
 }
 
+/*
+    The function word_lengths when provided with the filename of a dictionary text file, is designed to determine the count of words falling within a specific range of lengths, 
+    from 1 to a user-defined upper limit (inclusive). It stores the results in an array called "lengths," positioning the count for each word length at the corresponding index within the array. 
+    In the event that the file cannot be opened, the function returns FILE_ERR_OPEN to signal an issue with file access. Otherwise, if the operation is successful and the words are counted as specified, it returns FILE_OK, 
+    indicating the successful execution of the function.
+
+*/
 ErrorCode word_lengths(const char* dictionary, WordCount lengths[], WordLength count){
     FILE *dict;
     dict = fopen(dictionary,"r");
@@ -126,6 +150,14 @@ ErrorCode word_lengths(const char* dictionary, WordCount lengths[], WordLength c
     fclose(dict);
     return FILE_OK;
 }
+
+/*
+    The function info when provided with the filename of a dictionary text file, is designed to retrieve and provide a description of the dictionary's content. 
+    This description includes information about the length of the shortest and longest words within the dictionary, as well as the total count of words it contains. 
+    This information is structured and returned using the DictionaryInfo structure. In cases where the file cannot be opened, the function returns FILE_ERR_OPEN, indicating a problem with accessing the file. 
+    However, if the function successfully obtains and compiles the required information, it returns FILE_OK, signifying a successful execution.
+
+*/
 
 ErrorCode info(const char* dictionary, DictionaryInfo* info){
     FILE *dict;

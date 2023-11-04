@@ -7,8 +7,11 @@
 @date       3/11/2023
 @brief      This file contains the declarations of the following functions
 
-            encrypt
-            decrypt
+            str_to_upper
+            words_starting_with
+            spell_check
+            word_lengths
+            info
 
             The definitions of these functions can be found in q.c
 */
