@@ -1,0 +1,37 @@
+Allocating 256 bytes... done.
+The length of the path "/home/user/files/documents/images/" is 34.
+Allocating 256 bytes... done.
+The length of the path "/home/user/files/documents/images/20201031/" is 43.
+Searching for a string:
+	Text:     /home/user/files/documents/images/20201031/
+	Sub-text: /home/user/files/documents/images/20201031/
+	Result:   found 43 characters at position 34
+Searching for a string:
+	Text:     /home/user/files/documents/images/20201031/
+	Sub-text: 20201031
+	Result:   found 8 characters at position 34
+Both strings are equal.
+Both strings are equal.
+Both strings are equal.
+Allocating 256 bytes... done.
+The length of the path "/home/user/files/documents/images/20201031/20201201/" is 52.
+Searching for a string:
+	Text:     /home/user/files/documents/images/20201031/20201201/
+	Sub-text: /home/user/files/documents/images/20201031/20201201/
+	Result:   found 52 characters at position 34
+Searching for a string:
+	Text:     /home/user/files/documents/images/20201031/20201201/
+	Sub-text: 20201201
+	Result:   found 8 characters at position 34
+Both strings are equal.
+Both strings are equal.
+Searching for a string:
+	Text:     /home/user/files/documents/images/20201031/20201201/
+	Sub-text: /home/user/files/documents/images/20201031/20201201/
+	Result:   found 52 characters at position 34
+Searching for a string:
+	Text:     /home/user/files/documents/images/20201031/20201201/
+	Sub-text: /home/user/files/documents/images/20201031/20201201/
+	Result:   found 52 characters at position 34
+Searching for a string:
+	Te

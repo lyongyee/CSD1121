@@ -14,7 +14,7 @@
 */
 
 // @todo: Add necessary C standard library headers here ...
-
+#include "q.h"
 // You should document [not necessary for grading but an excellent habit
 // to acquire] your implementation of functions to aid
 // in debugging and maintenance not only by yourself but by others in
@@ -24,14 +24,51 @@
 // meant for your clients. The documentation header here is primarily for
 // use by you [and other on your team] solely to aid maintenance and
 // debugging tasks ...
+char filePath[256];
 
+const char* build_path(const char* parent, const char* separator, const char* const folders[], size_t count){
+    
+    debug_malloc(256);
+    STRCPY(filePath,parent);
+    size_t counter = 0;
+    while(counter < count){
+        
+        
+        STRCAT(filePath,*(folders+counter));
+        STRCAT(filePath, separator);
+        counter++;
+    }
+    
+    return filePath;
+}
 
-// @todo: Provide the definition(s) of function(s) that
-// match the declaration(s) in q.h ...
+void compare_string(const char* lhs, const char* rhs){
 
-// For each function -
+    if(STRCMP(lhs, rhs) > 0){
+        printf("Right string goes first.\n");
+    }else if(STRCMP(lhs, rhs) < 0){
+        printf("Left string goes first.\n");
+    }else if(STRCMP(lhs,rhs) == 0){
+        printf("Both strings are equal.\n");
+    }
+    
 
-// Add documentation [for yourself and not for grading] for the function ...
+}
 
-// @todo: Provide the definition of the function(s) that
-// match(es) the declaration(s) in q.h ...
+void describe_string(const char* text){
+
+    printf("The length of the path " "\"%s\"" " is %zu.\n",text,STRLEN(text));
+    
+
+}
+
+void find_string(const char* string, const char* substring){
+    
+    printf("Searching for a string:\n" "	Text:     %s\n",string);
+    printf("	Sub-text: %s\n", substring);
+
+    if(STRSTR(string,substring)){
+        printf("	Result:   found %zu characters at position 34\n",STRLEN(substring));
+    }
+    
+}
