@@ -28,15 +28,15 @@
 
 // TODO: Definitions of functions declared in q.h go here ...
 char const* find(char const *begin, char const *end, char val){
-    int counter = 0;
-    while(begin + counter < end){
+    
+    while(begin < end){
         
-        if(*begin + counter == val){
+        if(*begin == val){
             
-            return begin + counter;
+            return begin;
             
         }
-        counter++;
+        ++begin;
     }
 
     return NULL;
@@ -45,34 +45,83 @@ char const* find(char const *begin, char const *end, char val){
 
 char const* find_any(char const *begin, char const *end, char const *vals, int len){
    int counter = 0;
-    
-    while(counter < len){
+   
+    while(counter++ < len){
+
         
-    if(*(find(begin,end,*(vals+counter))) == *(vals+counter)){
-    return begin+counter;
-    }
-    counter ++;
+        if(find(begin,end,*(++vals)) != NULL){
+        return find(begin,end,*(vals));
+        }
+    
     }
     return NULL;
 }
 
-// int count(char const *begin, char const *end, char val){
-//     return 1;
-// }
+int count(char const *begin, char const *end, char val){
+    int counter = 0;
+    while(begin < end){
+        if(*begin++ == val){
+            ++counter;
+        }
+    }
+      
 
-// int count_any(char const *begin, char const *end, char const *vals, int len){
-//     return 1;
-// }
+    return counter;
+}
 
-// int compare(char const *begin1, char const *begin2, int len){
-//     return 1;
-// }
+int count_any(char const *begin, char const *end, char const *vals, int len){
+    int counter = 0;
+    int totalCount = 0;
+    while(counter++ < len){
+        totalCount += count(begin,end,*(vals++));
+
+    }
+    
+    return totalCount;
+
+}
+
+int compare(char const *begin1, char const *begin2, int len){
+    int counter = 0;
+    int result;
+    while(counter < len){
+        if(*(begin1+counter) == *(begin2+counter)){
+            result = 0;
+        }else if(*(begin1+counter) < *(begin2+counter)){
+            result = -1;
+        }else if(*(begin1+counter) > *(begin2+counter)){
+            result = 1;
+        }
+        counter++;
+    }
+
+    return result;
+}
 
 
-// void exchange(char *begin1, char *begin2, int len){
-//     return 1;
-// }
+void exchange(char *begin1, char *begin2, int len){
+    char temp;
+    
+    for(int counter = 0; counter < len; counter++){
+        
+        temp = *(begin1 + counter);
+        *(begin1+counter) = *(begin2+counter);
+        *(begin2+counter) = temp;
+        
+ 
+    }
+}
 
-// void copy(char *dst, char *src, int len){
-//     return 1;
-// }
+void copy(char *dst, char *src, int len){
+    
+    if(dst <= src || dst >= (src + len)){
+        for(int counter = 0; counter<len; counter++){
+        *(dst+counter) = *(src+counter);
+    }
+    }else{
+        for(int counter = len-1; counter >= 0; counter--){
+        *(dst+counter) = *(src+counter);
+    }
+    }
+    
+}

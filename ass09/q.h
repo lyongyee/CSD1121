@@ -7,8 +7,13 @@
 @date       09/11/2023
 @brief      This file contains the declarations of the following functions
 
-            encrypt
-            decrypt
+            find
+            find_any
+            count
+            count_any
+            compare
+            exchange
+            copy
 
             The definitions of these functions can be found in q.c
 */
@@ -25,9 +30,6 @@
 // What is the (type) of value returned by function?
 // Is there any particular input that will break the function?
 
-// NOTE 3: When uploading this file for grading, make sure to remove
-// all references to the subscript operator or the [ or ] symbols. 
-// It is important that even your comments should not include these symbols.
 
 // TODO: Now, declare the necessary functions.
 char const* find(char const *begin, char const *end, char val);
