@@ -28,18 +28,32 @@ char filePath[256];
 
 const char* build_path(const char* parent, const char* separator, const char* const folders[], size_t count){
     
-    debug_malloc(256);
-    STRCPY(filePath,parent);
-    size_t counter = 0;
-    while(counter < count){
-        
-        
-        STRCAT(filePath,*(folders+counter));
-        STRCAT(filePath, separator);
-        counter++;
+    // debug_malloc(count);
+    size_t total_length = STRLEN(parent);
+    for(size_t counter = 0; counter < count; counter++){
+        total_length += STRLEN(separator);
+        total_length += STRLEN(folders[counter]);
     }
+    char* result = (char*)debug_malloc(total_length+1);
+    if (result) {
+        // Copy the parent path to the result
+        STRCPY(result, parent);
+
+        // Iterate through the folders and concatenate them to the path using the separator
+        for (size_t i = 0; i < count; ++i) {
+            STRCAT(result, folders[i]);
+            STRCAT(result, separator);
+            
+        }
+
+        // Return the constructed path
+        return result;
+    }
+
+    // Return NULL if memory allocation failed
+    return NULL;
     
-    return filePath;
+    
 }
 
 void compare_string(const char* lhs, const char* rhs){
@@ -57,7 +71,7 @@ void compare_string(const char* lhs, const char* rhs){
 
 void describe_string(const char* text){
 
-    printf("The length of the path " "\"%s\"" " is %zu.\n",text,STRLEN(text));
+    printf("The length of the path " "%s\"" " is %zu.\n",text,STRLEN(text));
     
 
 }
@@ -68,7 +82,11 @@ void find_string(const char* string, const char* substring){
     printf("	Sub-text: %s\n", substring);
 
     if(STRSTR(string,substring)){
-        printf("	Result:   found %zu characters at position 34\n",STRLEN(substring));
+        long int position = STRSTR(string,substring) - string;
+        
+        printf("	Result:   found %zu characters at position %ld\n",STRLEN(substring), position);
+    }else{
+        printf("	Result:   not found\n");
     }
     
 }

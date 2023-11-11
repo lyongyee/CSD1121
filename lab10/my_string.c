@@ -60,7 +60,7 @@ char* my_strcat(char* dest, const char* src){
 }
 
 int my_strcmp(const char* lhs, const char* rhs){
-
+    return lhs - rhs;
 }
 
 char* my_strstr(const char* str, const char* substr){
