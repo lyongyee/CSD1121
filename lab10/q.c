@@ -5,26 +5,33 @@
 @section    Section B
 @lab        10
 @date       10/11/2023
-@brief      This file contains the declarations of the following functions
+@brief      This file contains the definitions of the following functions
 
-            encrypt
-            decrypt
+            build_path
+            compare_string
+            describe_string
+            find_string
 
-            The definitions of these functions can be found in q.c
+            The declarations of these functions can be found in q.h
 */
 
-// @todo: Add necessary C standard library headers here ...
-#include "q.h"
-// You should document [not necessary for grading but an excellent habit
-// to acquire] your implementation of functions to aid
-// in debugging and maintenance not only by yourself but by others in
-// your software development team ...
 
-// Remember, the function-level documentation header in q.h is primarily
-// meant for your clients. The documentation header here is primarily for
-// use by you [and other on your team] solely to aid maintenance and
-// debugging tasks ...
+#include "q.h"
+
 char filePath[256];
+
+/*
+ * @brief   Builds a file path by concatenating a parent path, separator, and an array of folders.
+ *
+ * @param   parent      The parent path.
+ * @param   separator   The separator to be used between the parent path and folders.
+ * @param   folders     An array of folder names to be appended to the parent path.
+ * @param   count       The number of folders in the 'folders' array.
+ *
+ * @return  A dynamically allocated string representing the constructed file path.
+ *          The caller is responsible for freeing the allocated memory.
+ *          Returns NULL if memory allocation fails.
+ */
 
 const char* build_path(const char* parent, const char* separator, const char* const folders[], size_t count){
     
@@ -56,6 +63,16 @@ const char* build_path(const char* parent, const char* separator, const char* co
     
 }
 
+/*
+ * @brief   Compares two strings lexicographically and prints a message indicating their relationship.
+ *
+ * @param   lhs     The left-hand side string for comparison.
+ * @param   rhs     The right-hand side string for comparison.
+ *
+ * @return  None.
+ *          Prints to the console whether the left string is less than, equal to, or greater than the right string.
+ */
+
 void compare_string(const char* lhs, const char* rhs){
 
     if(STRCMP(lhs, rhs) > 0){
@@ -69,12 +86,31 @@ void compare_string(const char* lhs, const char* rhs){
 
 }
 
+/*
+ * @brief   Prints the length of a given string.
+ *
+ * @param   text    The string to be described.
+ *
+ * @return  None.
+ *          Prints to the console the length of the given string.
+ */
 void describe_string(const char* text){
 
-    printf("The length of the path " "%s\"" " is %zu.\n",text,STRLEN(text));
+    printf("The length of the path " "\"%s\"" " is %zu.\n",text,STRLEN(text));
     
 
 }
+
+/*
+ * @brief   Searches for a substring in a given string and prints the result.
+ *
+ * @param   string      The string to be searched.
+ * @param   substring   The substring to search for in the main string.
+ *
+ * @return  None.
+ *          Prints to the console whether the substring is found in the main string,
+ *          and if found, the position of the substring in the main string.
+ */
 
 void find_string(const char* string, const char* substring){
     
@@ -84,7 +120,7 @@ void find_string(const char* string, const char* substring){
     if(STRSTR(string,substring)){
         long int position = STRSTR(string,substring) - string;
         
-        printf("	Result:   found %zu characters at position %ld\n",STRLEN(substring), position);
+        printf("	Result:   found %zu characters at a position %ld.\n",STRLEN(substring), position);
     }else{
         printf("	Result:   not found\n");
     }
